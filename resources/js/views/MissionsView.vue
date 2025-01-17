@@ -16,11 +16,7 @@ onMounted(async () => {
   })
 })
 const open = mission => {
-  missions.value.forEach(mission => {
-    mission.is_open = false
-  })
-
-  mission.is_open = true
+  mission.is_open = !mission.is_open;
 }
 const remove = async mission => {
   await apiFetch('delete', `/lunar-missions/${mission.id}`)
@@ -30,13 +26,12 @@ const remove = async mission => {
 </script>
 
 <template>
-  <div class="container mt-10 sm:mx-auto sm:w-full sm:max-w-2xl" v-if="missions">
-    <RouterLink to="/add-mission" class="bg-sky-500 text-white py-2 px-2 rounded shadow-md hover:bg-sky-600 mb-4">
+  <div class="container mt-10 sm:mx-auto sm:w-full sm:max-w-2xl flex flex-col" v-if="missions">
+    <RouterLink to="/add-mission" class="bg-sky-500 text-white py-2 px-2 rounded shadow-md hover:bg-sky-600 mb-4 block self-start">
       Добавить миссию
     </RouterLink>
 
     <MissionItem v-for="mission in missions" @open="open" @remove="remove" :mission="mission" />
 
-    <a class="bg-sky-500 text-white py-2 px-2 rounded shadow-md text-xs hover:bg-sky-600" href="">К списку миссий</a>
   </div>
 </template>

@@ -39,6 +39,7 @@ class SpaceFlightController extends Controller
         return [
             'data' => SpaceFlight::query()->get()->map(function (SpaceFlight $flight) {
                 return [
+                    'id' => $flight->id,
                     'flight_number' => $flight->flight_number,
                     'destination' => $flight->destination,
                     'launch_date' => $flight->launch_date,
@@ -55,12 +56,11 @@ class SpaceFlightController extends Controller
      */
     public function book(): JsonResponse
     {
-        $flightNumber = request()->input('flight_number');
+        $flightId = request()->input('id');
 
         $spaceFlight = SpaceFlight::query()
-            ->where('flight_number', $flightNumber)
-            ->first();
-
+            ->find($flightId);
+            
         if (!$spaceFlight) {
             throw new NotFoundHttpException();
         }

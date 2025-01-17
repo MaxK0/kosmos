@@ -13,7 +13,7 @@ const userId = inject('user_id')
 <template>
   <div class="px-4 mb-10 sm:px-0 bg-white shadow-xl rounded">
     <div class="flex justify-between w-full items-center p-6">
-      <h2 class="text-base font-semibold leading-7 text-sky-600 text-xl">{{ mission.name }}</h2>
+      <h2 class="text-base font-semibold leading-7 mb-2 text-sky-600 text-xl">{{ mission.name }}</h2>
       <div class="flex gap-4" v-if="!compact">
         <button @click="$emit('open', mission)">
           <i class="fa  text-xl" :class="{'fa-angle-down': mission.is_open, 'fa-angle-left': !mission.is_open}" aria-hidden="true"></i>
@@ -36,15 +36,15 @@ const userId = inject('user_id')
           <template v-if="!compact">
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt class="text-sm font-medium leading-6 text-gray-900">Место запуска</dt>
-              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Космический центр имени Кеннеди</dd>
+              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ mission.launch_details?.launch_site?.name }}</dd>
             </div>
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt class="text-sm font-medium leading-6 text-gray-900">Широта</dt>
-              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">28.5721000</dd>
+              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ mission.launch_details?.launch_site?.location?.latitude }}</dd>
             </div>
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt class="text-sm font-medium leading-6 text-gray-900">Долгота</dt>
-              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">-80.6480000</dd>
+              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ mission.launch_details?.launch_site?.location?.longitude }}</dd>
             </div>
           </template>
           <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -54,11 +54,11 @@ const userId = inject('user_id')
           <template v-if="!compact">
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt class="text-sm font-medium leading-6 text-gray-900">Широта</dt>
-              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">0.6740000</dd>
+              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ mission.landing_details?.landing_site?.coordinates?.latitude }}</dd>
             </div>
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt class="text-sm font-medium leading-6 text-gray-900">Долгота</dt>
-              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">23.4720000</dd>
+              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ mission.landing_details?.landing_site?.coordinates?.longitude }}</dd>
             </div>
           </template>
         </dl>
@@ -66,14 +66,14 @@ const userId = inject('user_id')
       <template v-if="!compact">
         <h2 class="my-6 text-xl text-sky-600">Информация о космическом корабле</h2>
         <div class="px-4 sm:px-0">
-          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Лунный модуль: </p>
-          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Управляющий модуль:</p>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Лунный модуль: {{ mission.spacecraft?.lunar_module }}</p>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Управляющий модуль: {{ mission.spacecraft?.command_module }}</p>
         </div>
       </template>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <ul>
-          <li class="flex justify-between gap-x-6 py-5" v-for="crew in mission.spacecraft?.crew ?? mission?.crew ?? []">
-            <div class="flex gap-x-4">
+          <li class="flex justify-between gap-x-6 py-2" v-for="crew in mission.spacecraft?.crew ?? mission?.crew ?? []">
+            <div class="grid gird-cols-2">
               <p class="text-sm font-semibold text-gray-900">{{ crew.name }}</p>
               <p class="mt-1 text-xs text-gray-500">{{ crew.role }}</p>
             </div>
