@@ -15,7 +15,7 @@ class LunarMissionController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return LunarMissionResource::collection(LunarMission::query()->get());
+        return LunarMissionResource::collection(LunarMission::query()->get()->sortByDesc('id'));
     }
 
     public function search()
