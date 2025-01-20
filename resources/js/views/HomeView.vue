@@ -7,7 +7,6 @@ const gagarin = ref()
 
 onMounted(async () => {
   gagarin.value = await apiFetch('get', '/gagarin-flight')
-  console.log(gagarin);
 })
 </script>
 
@@ -64,63 +63,63 @@ onMounted(async () => {
 
           <!--  -->
           <div class="mt-4 shadow-lg p-2 rounded">
-            <h2 class="mt-2 mb-2 font-bold text-xl"></h2>
+            <h2 class="mt-2 mb-2 font-bold text-xl">Приземление</h2>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Дата</p>
-              <p class="text-sm">1961-04-12</p>
+              <p class="text-sm">{{ gagarin.data[0].landing.date }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Страна</p>
-              <p class="text-sm">СССР</p>
+              <p class="text-sm">{{ gagarin.data[0].landing.site.country }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Название населеного пункта</p>
-              <p class="text-sm">Смеловка</p>
+              <p class="text-sm">{{ gagarin.data[0].landing.site.name }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Ширина</p>
-              <p class="text-sm">51.2700000</p>
+              <p class="text-sm">{{ gagarin.data[0].landing.site.coordinates.latitude }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Долгота</p>
-              <p class="text-sm">45.9970000</p>
+              <p class="text-sm">{{ gagarin.data[0].landing.site.coordinates.longitude }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Раскрытие парашгюта</p>
-              <p class="text-sm">Да</p>
+              <p class="text-sm">{{ gagarin.data[0].landing.details.parachute_landing ? 'Да' : 'Нет' }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Cкорость удара, м/с</p>
-              <p class="text-sm">7</p>
+              <p class="text-sm">{{ gagarin.data[0].landing.details.mpc }}</p>
             </div>
           </div>
 
           <!--  -->
           <div class="mt-4 shadow-lg p-2 rounded">
-            <h2 class="mt-2 mb-2 font-bold text-xl">Информация о космонафте</h2>
+            <h2 class="mt-2 mb-2 font-bold text-xl">Информация о космонавте</h2>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
-              <p class="font-bold text-gray-900">ФИО</p>
-              <p class="text-sm">Юрий Гагарин</p>
+              <p class="font-bold text-gray-900">Имя</p>
+              <p class="text-sm">{{ gagarin.data[0].cosmonaut.name }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Дата рождения</p>
-              <p class="text-sm">1934-03-09</p>
+              <p class="text-sm">{{ gagarin.data[0].cosmonaut.birthdate }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Звание</p>
-              <p class="text-sm">Старший лейтенант</p>
+              <p class="text-sm">{{ gagarin.data[0].cosmonaut.rank }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Биография</p>
-              <p class="text-sm">Родился в Клушино, Россия..</p>
+              <p class="text-sm">{{ gagarin.data[0].cosmonaut.bio.early_life }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Информация о карьере</p>
-              <p class="text-sm">Отобран в отряд космонавтов в 1960 году...</p>
+              <p class="text-sm">{{ gagarin.data[0].cosmonaut.bio.career }}</p>
             </div>
             <div class="px-4 py-4 grid grid-cols-2 sm:px-0">
               <p class="font-bold text-gray-900">Информация после полета</p>
-              <p class="text-sm">Стал международным героем..</p>
+              <p class="text-sm">{{ gagarin.data[0].cosmonaut.bio.post_flight }}</p>
             </div>
           </div>
 

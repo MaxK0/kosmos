@@ -13,11 +13,6 @@ use Illuminate\Http\Response;
 
 class LunarMissionController extends Controller
 {
-    /**
-     * Get missions
-     *
-     * @return AnonymousResourceCollection
-     */
     public function index(): AnonymousResourceCollection
     {
         return LunarMissionResource::collection(LunarMission::query()->get());
@@ -33,23 +28,11 @@ class LunarMissionController extends Controller
             ->get());
     }
 
-    /**
-     * Show one mission
-     *
-     * @param LunarMission $mission
-     * @return LunarMissionResource
-     */
     public function show(LunarMission $mission): LunarMissionResource
     {
         return LunarMissionResource::make($mission);
     }
 
-    /**
-     * Store lunar mission
-     *
-     * @param LunarMissionRequest $request
-     * @return JsonResponse
-     */
     public function store(LunarMissionRequest $request): JsonResponse
     {
         /** @var User $user */
@@ -64,13 +47,6 @@ class LunarMissionController extends Controller
         ], 201);
     }
 
-    /**
-     * Update mission
-     *
-     * @param LunarMission $mission
-     * @param LunarMissionRequest $request
-     * @return array[]
-     */
     public function update(LunarMission $mission, LunarMissionRequest $request): array
     {
         $mission->update($request->validated()['mission']);
@@ -83,12 +59,6 @@ class LunarMissionController extends Controller
         ];
     }
 
-    /**
-     * Delete mission
-     *
-     * @param LunarMission $mission
-     * @return Response
-     */
     public function delete(LunarMission $mission): Response
     {
         $mission->delete();

@@ -15,9 +15,6 @@ class RegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'first_name' => 'required|string|max:255|regex:/^[А-ЯЁA-Z]/u',
-//            'last_name' => 'required|string|max:255|regex:/^[А-ЯA-Z]/u',
-//            'patronymic' => 'required|string|max:255|regex:/^[А-ЯA-Z]/u',
             'first_name' => [
                 'required',
                 'string',

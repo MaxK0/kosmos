@@ -65,37 +65,21 @@ class LunarMissionRequest extends FormRequest
         ];
     }
 
-    /**
-     * Validate latitude
-     *
-     * @param $attribute
-     * @param $value
-     * @param $fail
-     * @return void
-     */
     private function validateLatitude($attribute, $value, $fail): void
     {
         $value = (float) $value;
 
         if ($value > 90 || $value < -90) {
-            $fail('Ошибка');
+            $fail('Неправильные координаты');
         }
     }
 
-    /**
-     * Validate latitude
-     *
-     * @param $attribute
-     * @param $value
-     * @param $fail
-     * @return void
-     */
     private function validateLongitude($attribute, $value, $fail): void
     {
         $value = (float) $value;
 
         if ($value > 180 || $value < -180) {
-            $fail('Ошибка');
+            $fail('Неправильные координаты');
         }
     }
 }

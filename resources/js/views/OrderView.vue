@@ -6,7 +6,7 @@ import {ref} from "vue";
 const form = ref({
   data: {
     fileimage: null,
-    message: '1234567890',
+    message: '',
   },
   errors: {},
 })
@@ -25,14 +25,10 @@ const drop = event => {
 const dragover = (e) => {
   e.preventDefault()
   dropStatus.value = 'over'
-
-  console.log('dragover');
 }
 const dragleave = (e) => {
   e.preventDefault()
   dropStatus.value = null
-
-  console.log('dragleave');
 }
 
 const sendForm = async () => {
@@ -82,7 +78,7 @@ const sendForm = async () => {
           <label for="message" class="block text-sm font-medium leading-6 text-gray-900">Подпись</label>
         </div>
         <div class="mt-2">
-          <input id="message" v-model="form.data.message" :class="{'has-error': form.errors.message}" type="text" class="p-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6">
+          <input id="message" v-model="form.data.message" placeholder="Подпись" :class="{'has-error': form.errors.message}" type="text" class="p-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6">
         </div>
         <ErrorDescription :error="form.errors.message" />
       </div>

@@ -11,12 +11,6 @@ use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
-    /**
-     * Registration
-     *
-     * @param RegistrationRequest $request
-     * @return JsonResponse
-     */
     public function registration(RegistrationRequest $request): JsonResponse
     {
         $user = User::query()->create($request->validated());
@@ -33,12 +27,6 @@ class AuthController extends Controller
         ], 201);
     }
 
-    /**
-     * Auth
-     *
-     * @param AuthRequest $request
-     * @return JsonResponse|array
-     */
     public function authorization(AuthRequest $request): JsonResponse|array
     {
         if (auth()->attempt($request->validated())) {
@@ -62,11 +50,6 @@ class AuthController extends Controller
         ], 401);
     }
 
-    /**
-     * Logout
-     *
-     * @return Response
-     */
     public function logout(): Response
     {
         auth()->user()->currentAccessToken()->delete();

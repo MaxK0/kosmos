@@ -11,12 +11,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SpaceFlightController extends Controller
 {
-    /**
-     * Create space flight
-     *
-     * @param SpaceFlightRequest $request
-     * @return JsonResponse
-     */
     public function store(SpaceFlightRequest $request): JsonResponse
     {
         SpaceFlight::query()->create($request->validated());
@@ -29,11 +23,6 @@ class SpaceFlightController extends Controller
         ], 201);
     }
 
-    /**
-     * Get space flights
-     *
-     * @return array
-     */
     public function index(): array
     {
         return [
@@ -49,11 +38,6 @@ class SpaceFlightController extends Controller
         ];
     }
 
-    /**
-     * Create book
-     *
-     * @return JsonResponse
-     */
     public function book(): JsonResponse
     {
         $flightId = request()->input('id');
